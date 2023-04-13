@@ -14,7 +14,7 @@ async function getAllCars(req: Request, res: Response) {
 }
 
 async function getSpecificCar(req: Request, res: Response) {
-  const carId = parseInt(req.params.carId);
+  const carId = req.params.carId;
   try {
     const car = await carService.getCar(carId);
     res.send(car);
@@ -29,7 +29,7 @@ async function createCar(req: Request, res: Response) {
   const { model, licensePlate, year, color } = req.body;
 
   try {
-    await carService.createCar(model, licensePlate, year, color)
+    await carService.createCar(model, licensePlate, year, color);
     res.sendStatus(httpStatus.CREATED);
   } catch (e) {
     console.log(e);
@@ -42,7 +42,7 @@ async function createCar(req: Request, res: Response) {
 }
 
 async function deleteCar(req: Request, res: Response) {
-  const carId = parseInt(req.params.carId);
+  const carId = req.params.carId;
 
   try {
     await carService.deleteCar(carId);
@@ -61,7 +61,7 @@ const carController = {
   getAllCars,
   getSpecificCar,
   createCar,
-  deleteCar
-}
+  deleteCar,
+};
 
 export default carController;

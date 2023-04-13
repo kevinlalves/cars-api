@@ -1,16 +1,16 @@
-import express, { json } from "express";
+import express, { json, Express } from "express";
 import "express-async-errors";
-import dotenv from "dotenv";
+
 import carsRouter from "./routes/carsRouter.js";
 import handleErrorsMiddleware from "./middlewares/errorHandlerMiddleware.js";
-dotenv.config();
+import { connectDb } from "./config/database.js";
 
 const app = express();
 app.use(json());
 app.use(carsRouter);
 app.use(handleErrorsMiddleware);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is up and running on port: ${port}`);
-});
+export function init(): Express {
+  connectDb();
+  return app;
+}

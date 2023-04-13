@@ -18,6 +18,7 @@ services:
       dockerfile: Dockerfile.development
     ports:
       - 3009:3000
+      - 5555:5555
     volumes:
       - .:/app:cached
     depends_on:
